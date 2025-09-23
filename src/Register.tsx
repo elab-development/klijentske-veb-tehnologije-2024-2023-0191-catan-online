@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './Register.css';
+import catanImage from './slike/katantabla.png';
+
+
 
 export default function Register() {
   const [username, setUsername] = useState<string>("");
@@ -43,43 +47,51 @@ export default function Register() {
   };
 
   return (
-    <div>
+
+    
+    <div className="register-container">
+      
+  <div className="register-box">
+    <div className="form-container">
       <h1>Registracija</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Korisničko ime: </label>
+          <label>Korisničko ime:</label>
           <input
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-
         <div>
-          <label>Email: </label>
+          <label>Email:</label>
           <input
             type="text"
             value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
-          <label>Šifra: </label>
+          <label>Šifra:</label>
           <input
             type={showPassword ? "text" : "password"}
             value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <button
-            type="button" 
-            onClick={() => setShowPassword(!showPassword)}
-          >
+          <button type="button" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? "Sakrij" : "Prikaži"}
           </button>
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Registruj se</button>
       </form>
     </div>
+    
+    
+  </div>
+  <div>
+      <img className="catan-image" src={catanImage} alt="Catan" />  
+    </div>
+</div>
   );
 }

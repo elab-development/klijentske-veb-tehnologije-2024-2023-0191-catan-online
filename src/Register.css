@@ -1,0 +1,82 @@
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #c3d0e0; 
+}
+
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 150px;
+  height: 100vh;
+
+}
+
+.register-box {
+  display: flex;
+  background-color: #484762;
+  border: 1px solid #2c2c2c;
+  border-radius: 8px;
+  padding: 40px;
+  gap: 50px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+    width: 400px;
+}
+
+.form-container h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #2c2c2c;
+}
+
+.form-container label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-container input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #2c2c2c;
+  width: 250px;
+}
+
+.form-container button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #2c2c2c;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.form-container button:hover {
+  background-color: #444;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+
+
+.catan-image {
+  width: 100%;
+  height: auto;
+}
+
+.catan-container {
+  width: 500px; 
+}
