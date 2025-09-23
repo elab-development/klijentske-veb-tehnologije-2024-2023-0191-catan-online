@@ -38,8 +38,8 @@ export default function Register() {
 
     setError("");
 
-    localStorage.setItem("userEmail", email);
-    navigate("/");
+    localStorage.setItem("user", JSON.stringify({ username, email, password }));
+     navigate("/stats"); 
   };
 
   return (
