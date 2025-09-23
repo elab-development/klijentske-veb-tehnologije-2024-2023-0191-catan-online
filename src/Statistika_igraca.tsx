@@ -1,4 +1,5 @@
 import React from "react";
+import "./Statistika_igraca.css"
 
 export default function Stats() {
  
@@ -15,9 +16,9 @@ export default function Stats() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="stats-container">
       <h1>Statistika igrača: {username}</h1>
-      <table border={1} style={{ borderCollapse: "collapse", marginTop: "20px" }}>
+      <table className="stats-table">
         <thead>
           <tr>
             <th>Odigrane partije</th>
