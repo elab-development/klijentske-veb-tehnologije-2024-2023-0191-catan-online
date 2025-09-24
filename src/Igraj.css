@@ -73,3 +73,26 @@
   border-radius: 12px;
   cursor: pointer;
 }
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* udaljava od table */
+  gap: 10px; /* razmak između dugmadi */
+}
+
+.dice-btn, .start-btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #272634;
+  color: white;
+  transition: background 0.3s;
+}
+
+.dice-btn:hover, .start-btn:hover {
+  background-color: #272634;
+}
