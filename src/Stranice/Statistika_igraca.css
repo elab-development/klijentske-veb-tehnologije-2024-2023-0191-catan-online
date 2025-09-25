@@ -1,47 +1,54 @@
 .stats-container {
+  background-color: #1a1a1a;    color: white;
+  min-height: 86vh;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
-  min-height: 80vh; 
-  padding: 20px;
-  background-color: #bbd1e9;
-  color: #333; 
-  font-family: Arial, sans-serif;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .stats-container h1 {
-    font-size: 50px; 
+  font-size: 42px;
   margin-bottom: 30px;
-  color: #222; 
+  color: gold;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
 }
 
 .stats-table {
   border-collapse: collapse;
-  width: 95%;        
-  max-width: 1600px;
+  width: 95%;
+  max-width: 1200px;
   text-align: center;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
 .stats-table th,
 .stats-table td {
-  border: 1px solid #333;
-  padding: 10px 15px;
+  padding: 18px 15px;
+  font-size: 18px;
 }
 
 .stats-table th {
-  background-color: #f7cb64; 
-  color: rgb(0, 0, 0);
-  height: 50px;
+  background-color: #f7cb64;
+  color: #222;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .stats-table tr:nth-child(even) {
-  background-color: #fee195; 
-  height: 70px;
-}
+  background-color: #2b2f3b; }
 
 .stats-table tr:nth-child(odd) {
-  background-color: #fee195; 
-  height: 70px;
+  background-color: #3b4050; }
+
+.stats-table tr:hover {
+  background-color: #444b5c;
+  transition: background-color 0.3s ease;
 }
 
+.stats-table td {
+  color: #eee;
+}

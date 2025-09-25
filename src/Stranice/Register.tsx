@@ -1,24 +1,41 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
-import catanImage from "../Slike/katantabla.png"; // putanja do tvoje slike
+import catanImage from "../Slike/katantabla.png";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!username || !email || !password) {
-      setError("Sva polja su obavezna");
+    if (!username.trim() || !email.trim() || !password.trim()) {
+      setError("⚠️ Sva polja su obavezna!");
       return;
     }
 
-    // Ovde ide tvoj register logic
-    console.log({ username, email, password });
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+
+    if (users.some((u: any) => u.email === email)) {
+      setError("⚠️ Korisnik sa ovim emailom već postoji!");
+      return;
+    }
+
+    const newUser = { username, email, password };
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("user", JSON.stringify(newUser));
+
+    console.log("✅ Registrovan:", newUser);
+
     setError("");
+
+    
+    navigate("/");
   };
 
   return (
@@ -59,7 +76,10 @@ const Register: React.FC = () => {
           <button type="submit">Registracija</button>
 
           <div className="register-section">
-            Već imate nalog? <a href="/login">Prijavite se</a>
+            Već imate nalog?{" "}
+            <Link to="/login" className="login-link">
+              Prijavite se
+            </Link>
           </div>
         </form>
 

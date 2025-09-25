@@ -30,39 +30,6 @@ const innerRing = [4, 5, 10, 14, 13, 8];
 const center = 9;
 const cornerIndices = [0, 2, 11, 18, 16, 7];
 
-// 🔺 Definišemo tromedje (spisak susednih polja)
-// Ovde je samo primer za demonstraciju – proširi po potrebi
-const tromedje: number[][] = [
-  [0, 1, 4],
-  [1, 2, 5],
-  [2, 5, 6],
-  [0, 3, 4],
-  [1, 4, 5],
-
-  [3, 4, 8],
-  [3, 7, 8],
-  [4, 5, 9],
-  [4, 8, 9],
-  [5, 6, 10],
-  [5, 9, 10],
-  [6, 10, 11],
-
-  [7, 8, 12],
-  [8, 12, 13],
-  [8, 9, 13],
-  [9, 13, 14],
-  [9, 10, 14],
-  [10, 14, 15],
-  [10, 11, 15],
-
-  [12, 13, 16],
-  [13, 16, 17],
-  [13, 14, 17],
-  [14, 17, 18],
-  [14, 15, 18],
-];
-
-
 export default function Igraj() {
   const [tiles, setTiles] = useState<(string | null)[]>(Array(19).fill(null));
   const [counts, setCounts] = useState<Record<string, number>>(
@@ -77,11 +44,6 @@ export default function Igraj() {
     { id: 2, name: "Igrač 2", resources: { drvo: 0, ovca: 0, pšenica: 0, cigla: 0, kamen: 0 } },
   ]);
   const [log, setLog] = useState<string[]>([]);
-
-  // čuvamo koje tromedje su dodeljene igračima
-  const [playerTromedje, setPlayerTromedje] = useState<
-    { id: number; fields: number[] }[]
-  >([]);
 
   const handleSelect = (idx: number, res: string) => {
     if (tiles[idx]) return;
@@ -190,20 +152,27 @@ export default function Igraj() {
 
 
   // 🎲 novo bacanje tokom igre
-const rollGameDice = () => {
-  const dice = Math.floor(Math.random() * 11) + 2; // 2-12
-  setRolled(dice);
+  const rollGameDice = () => {
+    const dice = Math.floor(Math.random() * 11) + 2; // 2-12
+    setRolled(dice);
 
-  const newPlayers = players.map(p => {
-    const updated = { ...p, resources: { ...p.resources } };
+    // pronalazimo pločice sa tim brojem
+    const hitTiles = numbers
+      .map((num, idx) => (num === dice ? idx : null))
+      .filter((idx): idx is number => idx !== null);
 
-    // pronađi sve tromedje za ovog igrača
-    const troms = playerTromedje.filter(t => t.id === p.id);
+    if (hitTiles.length === 0) {
+      setLog(prev => [`Baceno ${dice}, niko ništa ne dobija.`, ...prev]);
+      return;
+    }
 
-    troms.forEach(trom => {
-      trom.fields.forEach(idx => {
-        if (numbers[idx] === dice && tiles[idx] && tiles[idx] !== "pustinja") {
-          const r = tiles[idx]!;
+    // dodela resursa svim igračima (za sada jednostavno)
+    const resType = (idx: number) => tiles[idx]!;
+    const newPlayers = players.map(p => {
+      const updated = { ...p, resources: { ...p.resources } };
+      hitTiles.forEach(idx => {
+        const r = resType(idx);
+        if (r !== "pustinja") {
           updated.resources[r as keyof typeof updated.resources] += 1;
         }
       });

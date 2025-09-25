@@ -5,39 +5,53 @@ import eks2 from "../Slike/ekspanzija2.png";
 import eks3 from "../Slike/ekspanzija3.png";
 import eks4 from "../Slike/ekspanzija4.png";
 
-export type Expansion = {
+
+class Expansion {
   title: string;
   img: string;
   desc: string;
-};
+
+  constructor(title: string, img: string, desc: string) {
+    this.title = title;
+    this.img = img;
+    this.desc = desc;
+  }
+
+  
+  shortDesc(maxLength: number = 60): string {
+    return this.desc.length > maxLength
+      ? this.desc.slice(0, maxLength) + "..."
+      : this.desc;
+  }
+}
+
 
 const expansions: Expansion[] = [
-  {
-    title: "SEAFARERS",
-    img: eks1,
-    desc: "Dodaje more, brodove i nova ostrva za istraživanje i kolonizaciju.",
-  },
-  {
-    title: "TRADERS & BARBARIANS",
-    img: eks2,
-    desc: "Donosi nove scenarije, trgovce i nove mehanike kretanja karavana.",
-  },
-  {
-    title: "EXPLORERS & PIRATES",
-    img: eks3,
-    desc: "Dodaje misije, gusare i otkrivanje novih oblasti mape.",
-  },
-  {
-    title: "CITIES & KNIGHTS",
-    img: eks4,
-    desc: "Uvodi vitezove, unapređenja gradova i odbranu od varvara.",
-  },
+  new Expansion(
+    "SEAFARERS",
+    eks1,
+    "Dodaje more, brodove i nova ostrva za istraživanje i kolonizaciju."
+  ),
+  new Expansion(
+    "TRADERS & BARBARIANS",
+    eks2,
+    "Donosi nove scenarije, trgovce i nove mehanike kretanja karavana."
+  ),
+  new Expansion(
+    "EXPLORERS & PIRATES",
+    eks3,
+    "Dodaje misije, gusare i otkrivanje novih oblasti mape."
+  ),
+  new Expansion(
+    "CITIES & KNIGHTS",
+    eks4,
+    "Uvodi vitezove, unapređenja gradova i odbranu od varvara."
+  ),
 ];
 
 export default function Ekspanzije() {
   useEffect(() => {
     document.body.style.overflow = "hidden";
-
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -50,7 +64,8 @@ export default function Ekspanzije() {
           <div key={i} className="ekspanzija-box">
             <h3>{exp.title}</h3>
             <img src={exp.img} alt={exp.title} />
-            <p>{exp.desc}</p>
+            {}
+            <p>{exp.shortDesc(80)}</p>
           </div>
         ))}
       </div>

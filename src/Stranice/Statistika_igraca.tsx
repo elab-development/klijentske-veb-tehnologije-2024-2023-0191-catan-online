@@ -1,19 +1,47 @@
 import React from "react";
-import "./Statistika_igraca.css"
+import "./Statistika_igraca.css";
+
+
+class PlayerStats {
+  odigrane: number;
+  pobedjene: number;
+  ukupnoPoena: number;
+
+  constructor(odigrane: number, pobedjene: number, ukupnoPoena: number) {
+    this.odigrane = odigrane;
+    this.pobedjene = pobedjene;
+    this.ukupnoPoena = ukupnoPoena;
+  }
+
+  
+  getProcenat(): number {
+    return this.odigrane > 0 ? Math.round((this.pobedjene / this.odigrane) * 100) : 0;
+  }
+
+  
+  getPoeniPoPartiji(): number {
+    return this.odigrane > 0 ? (this.ukupnoPoena / this.odigrane).toFixed(2) as unknown as number : 0;
+  }
+
+  
+  getStats() {
+    return {
+      odigrane: this.odigrane,
+      pobedjene: this.pobedjene,
+      procenat: this.getProcenat(),
+      poeniPoPartiji: this.getPoeniPoPartiji(),
+      ukupnoPoena: this.ukupnoPoena,
+    };
+  }
+}
 
 export default function Stats() {
- 
   const userData = localStorage.getItem("user");
   const username = userData ? JSON.parse(userData).username : "Nepoznati korisnik";
 
-
-  const stats = {
-    odigrane: 0,
-    pobedjene: 0,
-    procenat: 0,
-    poeniPoPartiji: 0,
-    ukupnoPoena: 0,
-  };
+  
+  const playerStats = new PlayerStats(12, 7, 85);
+  const stats = playerStats.getStats();
 
   return (
     <div className="stats-container">
