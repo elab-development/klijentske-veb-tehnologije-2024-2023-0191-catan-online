@@ -7,14 +7,22 @@
   gap: 50px; 
 }
 
+
 .navbar-left h1 {
   font-size: 22px;
   margin: 0;
   color: #ffffff;
 }
 
+.navbar-left {
+  flex: 1;
+}
+
+
 .navbar-center {
+  flex: 1;
   display: flex;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -29,8 +37,11 @@
   color: #ffcc00;
 }
 
+
 .navbar-right {
+  flex: 1;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 10px;
   color: #ffffff;
@@ -40,22 +51,31 @@
   font-size: 20px;
 }
 
-
-.navbar-left {
-  flex: 1;
+.username {
+  font-weight: 500;
+  color: #ffffff;
 }
 
-.navbar-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+
+.logout-btn {
+  background-color: #ff4d4d;  
+  border: none;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  margin-right: 10px;
 }
 
-.navbar-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
+.logout-btn:hover {
+  background-color: #cc0000;  
+  transform: scale(1.05);
+}
+
+.logout-btn:active {
+  background-color: #990000;  
+  transform: scale(0.95);
 }

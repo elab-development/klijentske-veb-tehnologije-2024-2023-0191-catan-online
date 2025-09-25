@@ -5,6 +5,7 @@ import Stats from "./Stranice/Statistika_igraca";
 import CatanInfo from "./Stranice/Pravila_igre";
 import Igraj from "./Stranice/Igraj";
 import Login from "./Stranice/Login";
+import Ekspanzije from "./Stranice/Ekspanzije";
 import Navbar from "./Komponente/NavBar";
 import Footer from "./Komponente/Footer";
 import './App.css';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/statistika" element={<Stats />} />
         <Route path="/pravila" element={<CatanInfo />} />
         <Route path="/igraj" element={<Igraj />} />
+        <Route path="/ekspanzije" element={<Ekspanzije />} />
       </Routes>
       <Footer/>
     </Router>

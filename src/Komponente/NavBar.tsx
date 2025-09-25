@@ -1,10 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
 const Navbar: React.FC = () => {
-  const user = localStorage.getItem("user");
-  const username = user ? JSON.parse(user).username : "Gost";
+  const navigate = useNavigate();
+
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar">
@@ -15,22 +22,26 @@ const Navbar: React.FC = () => {
       <div className="navbar-center">
         <Link to="/">Početna</Link>
         <Link to="/pravila">Pravila igre</Link>
-         <Link to="/igraj">Igraj</Link>
+        <Link to="/igraj">Igraj</Link>
         <Link to="/ekspanzije">Ekspanzije</Link>
         <Link to="/statistika">Statistika</Link>
       </div>
 
       <div className="navbar-right">
-        {username === "Gost" ? (
+        {!user ? (
           <>
             <Link to="/login">Login</Link>
             <Link to="/register">Registracija</Link>
           </>
         ) : (
-          <>
-            <span>{username}</span>
+          <div className="user-section">
+             <button className="logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
             <span className="user-icon">👤</span>
-          </>
+            <span className="username">{user.username}</span>
+           
+          </div>
         )}
       </div>
     </nav>

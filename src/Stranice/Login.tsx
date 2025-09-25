@@ -12,11 +12,18 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     if (username === "admin" && password === "1234") {
-      localStorage.setItem("user", JSON.stringify({ username }));
-      navigate("/");
-    } else {
-      alert("Pogrešno korisničko ime ili lozinka");
-    }
+  const userData = {
+    username,
+    role: "admin",
+    lastLogin: new Date().toISOString(),
+  };
+
+  localStorage.setItem("user", JSON.stringify(userData));
+  navigate("/");
+} else {
+  alert("Pogrešno korisničko ime ili lozinka!");
+}
+
   };
 
   return (

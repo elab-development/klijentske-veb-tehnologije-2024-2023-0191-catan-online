@@ -4,7 +4,7 @@ import "./Pravila_igre.css";
 export default function PravilaIgre() {
   return (
     <div className="pravila-container">
-      {/* Gornja dva diva */}
+     
       <div className="pravila-top">
         <div className="pravila-box">
           <h3>Opis</h3>
@@ -22,7 +22,7 @@ export default function PravilaIgre() {
         </div>
       </div>
 
-      {/* Donji red */}
+
       <div className="pravila-left">
         <h3>Tok poteza</h3>
         <ol>
