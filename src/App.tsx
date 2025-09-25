@@ -1,18 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./Komponente/Home";
-import Register from "./Komponente/Register";
-import Stats from "./Komponente/Statistika_igraca";
-import CatanInfo from "./Komponente/Pravila_igre";
-import Igraj from "./Komponente/Igraj";
-import Login from "./Komponente/Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Stranice/Home";
+import Register from "./Stranice/Register";
+import Stats from "./Stranice/Statistika_igraca";
+import CatanInfo from "./Stranice/Pravila_igre";
+import Igraj from "./Stranice/Igraj";
+import Login from "./Stranice/Login";
+import Navbar from "./Komponente/NavBar";
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <nav>
-        <Link to="/">Početna</Link> | <Link to="/stats">Statistika</Link> | <Link to="/catan">Pravila Catan</Link> | <Link to="/igraj">Igraj</Link> | <Link to="/register">Registracija</Link> | <Link to="/login">Login</Link>
-      </nav>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

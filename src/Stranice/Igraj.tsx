@@ -2,12 +2,12 @@
   import React, { useState } from "react";
   import "./Igraj.css";
 
-  import pustinjaImg from "../slike/pustinja.png";
-  import drvoImg from "../slike/drvo.png";
-  import ovcaImg from "../slike/ovca.png";
-  import psenicaImg from "../slike/psenica.png";
-  import ciglaImg from "../slike/cigla.png";
-  import kamenImg from "../slike/kamen.png";
+  import pustinjaImg from "../Slike/pustinja.png";
+  import drvoImg from "../Slike/drvo.png";
+  import ovcaImg from "../Slike/ovca.png";
+  import psenicaImg from "../Slike/psenica.png";
+  import ciglaImg from "../Slike/cigla.png";
+  import kamenImg from "../Slike/kamen.png";
 
 
 

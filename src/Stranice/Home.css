@@ -1,0 +1,87 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: white;
+  background-color: #1c1c1c;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #2a2a3a;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-icon {
+  font-size: 20px;
+}
+
+.home-main {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.hex-logo {
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.play-btn {
+  background-color: #c62828;
+  color: white;
+  font-size: 24px;
+  padding: 15px 60px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.play-btn:hover {
+  background-color: #b71c1c;
+}
+
+.options {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.option-btn {
+  background-color: #66bb6a;
+  color: black;
+  font-size: 16px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  background-color: #388e3c;
+  color: white;
+}
+
+.home-footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #2a2a3a;
+  font-size: 14px;
+}
