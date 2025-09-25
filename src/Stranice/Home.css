@@ -1,7 +1,7 @@
 .home {
   display: flex;
   flex-direction: column;
-  height: 92vh;
+  height: 86vh;
   color: white;
 }
 
@@ -26,6 +26,11 @@
   height: 450px;
   margin-bottom: -50px;
   margin-top: -50px;
+  transition: transform 0.3s ease;
+}
+
+.hex-logo:hover {
+  transform: scale(1.05);
 }
 
 .play-btn {

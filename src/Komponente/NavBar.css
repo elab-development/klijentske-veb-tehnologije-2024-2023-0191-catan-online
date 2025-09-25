@@ -1,9 +1,10 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; 
   align-items: center;
   padding: 15px 30px;
   background-color: #2a2a3a;
+  gap: 50px; 
 }
 
 .navbar-left h1 {
@@ -37,4 +38,24 @@
 
 .user-icon {
   font-size: 20px;
+}
+
+
+.navbar-left {
+  flex: 1;
+}
+
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
 }

@@ -14,10 +14,10 @@ const Navbar: React.FC = () => {
 
       <div className="navbar-center">
         <Link to="/">Početna</Link>
-        <Link to="/catan">Pravila igre</Link>
+        <Link to="/pravila">Pravila igre</Link>
+         <Link to="/igraj">Igraj</Link>
         <Link to="/ekspanzije">Ekspanzije</Link>
-        <Link to="/igraj">Igraj</Link>
-        <Link to="/stats">Statistika</Link>
+        <Link to="/statistika">Statistika</Link>
       </div>
 
       <div className="navbar-right">

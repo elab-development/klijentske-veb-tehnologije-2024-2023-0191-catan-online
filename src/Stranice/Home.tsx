@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import { useEffect } from "react";
 
 import pozadina from "../Slike/pozadina.png";
 import katantabla from "../Slike/katantabla.png";
@@ -12,6 +13,15 @@ const Home: React.FC = () => {
     : "Gost";
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className="home">

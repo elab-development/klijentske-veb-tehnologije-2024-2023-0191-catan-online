@@ -6,12 +6,13 @@ import CatanInfo from "./Stranice/Pravila_igre";
 import Igraj from "./Stranice/Igraj";
 import Login from "./Stranice/Login";
 import Navbar from "./Komponente/NavBar";
+import Footer from "./Komponente/Footer";
 import './App.css';
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -20,6 +21,7 @@ function App() {
         <Route path="/pravila" element={<CatanInfo />} />
         <Route path="/igraj" element={<Igraj />} />
       </Routes>
+      <Footer/>
     </Router>
   );
 }
