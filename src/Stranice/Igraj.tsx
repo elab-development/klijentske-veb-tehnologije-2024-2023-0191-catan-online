@@ -30,6 +30,39 @@ const innerRing = [4, 5, 10, 14, 13, 8];
 const center = 9;
 const cornerIndices = [0, 2, 11, 18, 16, 7];
 
+// 🔺 Definišemo tromedje (spisak susednih polja)
+// Ovde je samo primer za demonstraciju – proširi po potrebi
+const tromedje: number[][] = [
+  [0, 1, 4],
+  [1, 2, 5],
+  [2, 5, 6],
+  [0, 3, 4],
+  [1, 4, 5],
+
+  [3, 4, 8],
+  [3, 7, 8],
+  [4, 5, 9],
+  [4, 8, 9],
+  [5, 6, 10],
+  [5, 9, 10],
+  [6, 10, 11],
+
+  [7, 8, 12],
+  [8, 12, 13],
+  [8, 9, 13],
+  [9, 13, 14],
+  [9, 10, 14],
+  [10, 14, 15],
+  [10, 11, 15],
+
+  [12, 13, 16],
+  [13, 16, 17],
+  [13, 14, 17],
+  [14, 17, 18],
+  [14, 15, 18],
+];
+
+
 export default function Igraj() {
   const [tiles, setTiles] = useState<(string | null)[]>(Array(19).fill(null));
   const [counts, setCounts] = useState<Record<string, number>>(
@@ -39,12 +72,16 @@ export default function Igraj() {
   const [rolled, setRolled] = useState<number | null>(null);
   const [started, setStarted] = useState(false);
 
-  // jednostavno: dva igrača
   const [players, setPlayers] = useState([
     { id: 1, name: "Igrač 1", resources: { drvo: 0, ovca: 0, pšenica: 0, cigla: 0, kamen: 0 } },
     { id: 2, name: "Igrač 2", resources: { drvo: 0, ovca: 0, pšenica: 0, cigla: 0, kamen: 0 } },
   ]);
   const [log, setLog] = useState<string[]>([]);
+
+  // čuvamo koje tromedje su dodeljene igračima
+  const [playerTromedje, setPlayerTromedje] = useState<
+    { id: number; fields: number[] }[]
+  >([]);
 
   const handleSelect = (idx: number, res: string) => {
     if (tiles[idx]) return;
@@ -95,41 +132,95 @@ export default function Igraj() {
     setNumbers(newNumbers);
   };
 
-  // 🎲 novo bacanje tokom igre
-  const rollGameDice = () => {
-    const dice = Math.floor(Math.random() * 11) + 2; // 2-12
-    setRolled(dice);
+  const startGame = () => {
+  // izmešaj sve tromedje
+  const shuffled = [...tromedje].sort(() => Math.random() - 0.5);
 
-    // pronalazimo pločice sa tim brojem
-    const hitTiles = numbers
-      .map((num, idx) => (num === dice ? idx : null))
-      .filter((idx): idx is number => idx !== null);
+  const chosenForPlayers: { id: number; fields: number[] }[] = [];
 
-    if (hitTiles.length === 0) {
-      setLog(prev => [`Baceno ${dice}, niko ništa ne dobija.`, ...prev]);
-      return;
+  // dodeli po 2 tromedje za svakog igrača
+  for (let playerId = 1; playerId <= 2; playerId++) {
+    let playerTrom: number[][] = [];
+
+    for (let i = 0; i < 2; i++) {
+      const candidate = shuffled.find(tri => {
+        // nije već izabrana
+        const alreadyTaken = chosenForPlayers.some(chosen =>
+          chosen.fields.every(f => tri.includes(f))
+        );
+
+        // nema preklapanja sa već postojećim tromedjama istog igrača
+        const overlapWithSelf = playerTrom.some(
+          t => t.some(f => tri.includes(f))
+        );
+
+        // nema preklapanja sa tromedjama drugih igrača
+        const overlapWithOthers = chosenForPlayers.some(chosen =>
+          chosen.fields.some(f => tri.includes(f))
+        );
+
+        return !alreadyTaken && !overlapWithSelf && !overlapWithOthers;
+      });
+
+      if (candidate) {
+        playerTrom.push(candidate);
+        // odmah rezerviši
+        shuffled.splice(shuffled.indexOf(candidate), 1);
+      }
     }
 
-    // dodela resursa svim igračima (za sada jednostavno)
-    const resType = (idx: number) => tiles[idx]!;
-    const newPlayers = players.map(p => {
-      const updated = { ...p, resources: { ...p.resources } };
-      hitTiles.forEach(idx => {
-        const r = resType(idx);
-        if (r !== "pustinja") {
+    // ubaci u konačnu listu
+    playerTrom.forEach(tri => {
+      chosenForPlayers.push({ id: playerId, fields: tri });
+    });
+  }
+
+  setPlayerTromedje(chosenForPlayers);
+
+  // log prikaz
+  const msgs = chosenForPlayers.map((obj, i) => {
+    const nums = obj.fields.map(f => numbers[f]).filter(Boolean);
+    const ress = obj.fields.map(f => tiles[f]);
+    return `Igrač ${obj.id}: tromedja ${JSON.stringify(obj.fields)} – brojevi ${nums.join(", ")} – resursi ${ress.join(", ")}`;
+  });
+
+  setLog(prev => [...msgs, ...prev]);
+  setStarted(true);
+};
+
+
+  // 🎲 novo bacanje tokom igre
+const rollGameDice = () => {
+  const dice = Math.floor(Math.random() * 11) + 2; // 2-12
+  setRolled(dice);
+
+  const newPlayers = players.map(p => {
+    const updated = { ...p, resources: { ...p.resources } };
+
+    // pronađi sve tromedje za ovog igrača
+    const troms = playerTromedje.filter(t => t.id === p.id);
+
+    troms.forEach(trom => {
+      trom.fields.forEach(idx => {
+        if (numbers[idx] === dice && tiles[idx] && tiles[idx] !== "pustinja") {
+          const r = tiles[idx]!;
           updated.resources[r as keyof typeof updated.resources] += 1;
         }
       });
-      return updated;
     });
 
-    setPlayers(newPlayers);
-    setLog(prev => [`Baceno ${dice}, dodeljeni resursi: ${hitTiles.map(i => tiles[i]).join(", ")}`, ...prev]);
-  };
+    return updated;
+  });
+
+  setPlayers(newPlayers);
+
+  setLog(prev => [`Baceno ${dice}`, ...prev]);
+};
+
 
   const endGame = () => {
     console.log("Rezultati:", players);
-    window.location.reload(); // reset stranice
+    window.location.reload(); 
   };
 
   const resourceImages: Record<string, string> = {
@@ -190,10 +281,7 @@ export default function Igraj() {
             <button className="dice-btn" onClick={rollDiceAndAssign}>
               Baci kocku i dodeli brojeve
             </button>
-            <button
-              className="start-btn"
-              onClick={() => setStarted(true)}
-            >
+            <button className="start-btn" onClick={startGame}>
               Počni igru
             </button>
           </>
@@ -215,7 +303,9 @@ export default function Igraj() {
           {players.map(p => (
             <div key={p.id}>
               <h3>{p.name}</h3>
-              <p>🌲 {p.resources.drvo} 🐑 {p.resources.ovca} 🌾 {p.resources.pšenica} 🧱 {p.resources.cigla} 🪨 {p.resources.kamen}</p>
+              <p>
+                🌲 {p.resources.drvo} 🐑 {p.resources.ovca} 🌾 {p.resources.pšenica} 🧱 {p.resources.cigla} 🪨 {p.resources.kamen}
+              </p>
             </div>
           ))}
           <h3>Istorija bacanja:</h3>
