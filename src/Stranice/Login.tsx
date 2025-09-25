@@ -12,18 +12,11 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     if (username === "admin" && password === "1234") {
-  const userData = {
-    username,
-    role: "admin",
-    lastLogin: new Date().toISOString(),
-  };
-
-  localStorage.setItem("user", JSON.stringify(userData));
-  navigate("/");
-} else {
-  alert("Pogrešno korisničko ime ili lozinka!");
-}
-
+      localStorage.setItem("user", JSON.stringify({ username }));
+      navigate("/");
+    } else {
+      alert("Pogrešno korisničko ime ili lozinka");
+    }
   };
 
   return (
@@ -63,9 +56,6 @@ const Login: React.FC = () => {
 
           <img className="login-image" src={catanImage} alt="Catan tabla" />
         </div>
-      </div>
-      <div className="footer">
-        Facebook | LinkedIn | YouTube | Instagram
       </div>
     </>
   );
