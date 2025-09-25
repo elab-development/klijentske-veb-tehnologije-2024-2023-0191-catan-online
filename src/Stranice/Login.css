@@ -99,16 +99,6 @@ body, html {
   max-width: 45%;
 }
 
-.header {
-  width: 100%;
-  background-color: #23232e;
-  color: #c5d1e8;
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
 .footer {
   width: 100%;
   background-color: #23232e;

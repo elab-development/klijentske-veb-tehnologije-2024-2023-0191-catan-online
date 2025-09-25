@@ -16,8 +16,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/stats" element={<Stats />} />
-        <Route path="/catan" element={<CatanInfo />} />
+        <Route path="/statistika" element={<Stats />} />
+        <Route path="/pravila" element={<CatanInfo />} />
         <Route path="/igraj" element={<Igraj />} />
       </Routes>
     </Router>

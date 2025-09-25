@@ -21,7 +21,6 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <div className="header">Settlers of CATAN</div>
       <div className="login-container">
         <div className="login-wrapper">
           <form onSubmit={handleSubmit} className="login-form">
