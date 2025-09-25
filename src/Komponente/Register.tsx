@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Register.css';
-import catanImage from './slike/katantabla.png';
+import catanImage from '../slike/katantabla.png';
 
 
 

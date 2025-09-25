@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./Home";
-import Register from "./Register";
-import Stats from "./Statistika_igraca";
-import CatanInfo from "./Pravila_igre";
-import Igraj from "./Igraj";
-import Login from "./Login";
+import Home from "./Komponente/Home";
+import Register from "./Komponente/Register";
+import Stats from "./Komponente/Statistika_igraca";
+import CatanInfo from "./Komponente/Pravila_igre";
+import Igraj from "./Komponente/Igraj";
+import Login from "./Komponente/Login";
 import './App.css';
 
 function App() {
