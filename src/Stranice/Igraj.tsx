@@ -30,38 +30,18 @@ const innerRing = [4, 5, 10, 14, 13, 8];
 const center = 9;
 const cornerIndices = [0, 2, 11, 18, 16, 7];
 
-
-
 const tromedje: number[][] = [
-  [0, 1, 4],
-  [1, 2, 5],
-  [2, 5, 6],
-  [0, 3, 4],
-  [1, 4, 5],
-
-  [3, 4, 8],
-  [3, 7, 8],
-  [4, 5, 9],
-  [4, 8, 9],
-  [5, 6, 10],
-  [5, 9, 10],
+  [0, 1, 4], [1, 2, 5], [2, 5, 6],
+  [0, 3, 4], [1, 4, 5],
+  [3, 4, 8], [3, 7, 8], [4, 5, 9],
+  [4, 8, 9], [5, 6, 10], [5, 9, 10],
   [6, 10, 11],
-
-  [7, 8, 12],
-  [8, 12, 13],
-  [8, 9, 13],
-  [9, 13, 14],
-  [9, 10, 14],
-  [10, 14, 15],
-  [10, 11, 15],
-
-  [12, 13, 16],
-  [13, 16, 17],
-  [13, 14, 17],
-  [14, 17, 18],
-  [14, 15, 18],
+  [7, 8, 12], [8, 12, 13], [8, 9, 13],
+  [9, 13, 14], [9, 10, 14],
+  [10, 14, 15], [10, 11, 15],
+  [12, 13, 16], [13, 16, 17], [13, 14, 17],
+  [14, 17, 18], [14, 15, 18],
 ];
-
 
 export default function Igraj() {
   const [tiles, setTiles] = useState<(string | null)[]>(Array(19).fill(null));
@@ -77,11 +57,7 @@ export default function Igraj() {
     { id: 2, name: "Igrač 2", resources: { drvo: 0, ovca: 0, pšenica: 0, cigla: 0, kamen: 0 } },
   ]);
   const [log, setLog] = useState<string[]>([]);
-
-  
-  const [playerTromedje, setPlayerTromedje] = useState<
-    { id: number; fields: number[] }[]
-  >([]);
+  const [playerTromedje, setPlayerTromedje] = useState<{ id: number; fields: number[] }[]>([]);
 
   const handleSelect = (idx: number, res: string) => {
     if (tiles[idx]) return;
@@ -133,94 +109,85 @@ export default function Igraj() {
   };
 
   const startGame = () => {
-  
-  const shuffled = [...tromedje].sort(() => Math.random() - 0.5);
+   const allAssigned = tiles.every((tile, idx) => {
+    if (tile === "pustinja") return true;
+    return numbers[idx] !== null;
+  });
 
-  const chosenForPlayers: { id: number; fields: number[] }[] = [];
+  if (!allAssigned) {
+    alert("Prvo dodeli brojeve svim poljima (osim pustinje)!");
+    return;
+  }
+    const shuffled = [...tromedje].sort(() => Math.random() - 0.5);
+    const chosenForPlayers: { id: number; fields: number[] }[] = [];
 
-  
-  for (let playerId = 1; playerId <= 2; playerId++) {
-    let playerTrom: number[][] = [];
+    for (let playerId = 1; playerId <= 2; playerId++) {
+      let playerTrom: number[][] = [];
 
-    for (let i = 0; i < 2; i++) {
-      const candidate = shuffled.find(tri => {
-        
-        const alreadyTaken = chosenForPlayers.some(chosen =>
-          chosen.fields.every(f => tri.includes(f))
-        );
+      for (let i = 0; i < 2; i++) {
+        const candidate = shuffled.find(tri => {
+          const alreadyTaken = chosenForPlayers.some(chosen =>
+            chosen.fields.every(f => tri.includes(f))
+          );
+          const overlapWithSelf = playerTrom.some(
+            t => t.some(f => tri.includes(f))
+          );
+          const overlapWithOthers = chosenForPlayers.some(chosen =>
+            chosen.fields.some(f => tri.includes(f))
+          );
+          return !alreadyTaken && !overlapWithSelf && !overlapWithOthers;
+        });
 
-        
-        const overlapWithSelf = playerTrom.some(
-          t => t.some(f => tri.includes(f))
-        );
-
-        
-        const overlapWithOthers = chosenForPlayers.some(chosen =>
-          chosen.fields.some(f => tri.includes(f))
-        );
-
-        return !alreadyTaken && !overlapWithSelf && !overlapWithOthers;
-      });
-
-      if (candidate) {
-        playerTrom.push(candidate);
-        
-        shuffled.splice(shuffled.indexOf(candidate), 1);
+        if (candidate) {
+          playerTrom.push(candidate);
+          shuffled.splice(shuffled.indexOf(candidate), 1);
+        }
       }
+
+      playerTrom.forEach(tri => {
+        chosenForPlayers.push({ id: playerId, fields: tri });
+      });
     }
 
-    
-    playerTrom.forEach(tri => {
-      chosenForPlayers.push({ id: playerId, fields: tri });
+    setPlayerTromedje(chosenForPlayers);
+
+    const msgs = chosenForPlayers.map(obj => {
+      const nums = obj.fields.map(f => numbers[f]).filter(Boolean);
+      const ress = obj.fields.map(f => tiles[f]);
+      return `Igrač ${obj.id}: tromedja ${JSON.stringify(obj.fields)} – brojevi ${nums.join(", ")} – resursi ${ress.join(", ")}`;
     });
-  }
 
-  setPlayerTromedje(chosenForPlayers);
+    setLog(prev => [...msgs, ...prev]);
+    setStarted(true);
+  };
 
-  
-  const msgs = chosenForPlayers.map((obj, i) => {
-    const nums = obj.fields.map(f => numbers[f]).filter(Boolean);
-    const ress = obj.fields.map(f => tiles[f]);
-    return `Igrač ${obj.id}: tromedja ${JSON.stringify(obj.fields)} – brojevi ${nums.join(", ")} – resursi ${ress.join(", ")}`;
-  });
+  const rollGameDice = () => {
+    const dice = Math.floor(Math.random() * 11) + 2;
+    setRolled(dice);
 
-  setLog(prev => [...msgs, ...prev]);
-  setStarted(true);
-};
+    const newPlayers = players.map(p => {
+      const updated = { ...p, resources: { ...p.resources } };
+      const troms = playerTromedje.filter(t => t.id === p.id);
 
-
-  
-const rollGameDice = () => {
-  const dice = Math.floor(Math.random() * 11) + 2; 
-  setRolled(dice);
-
-  const newPlayers = players.map(p => {
-    const updated = { ...p, resources: { ...p.resources } };
-
-    
-    const troms = playerTromedje.filter(t => t.id === p.id);
-
-    troms.forEach(trom => {
-      trom.fields.forEach(idx => {
-        if (numbers[idx] === dice && tiles[idx] && tiles[idx] !== "pustinja") {
-          const r = tiles[idx]!;
-          updated.resources[r as keyof typeof updated.resources] += 1;
-        }
+      troms.forEach(trom => {
+        trom.fields.forEach(idx => {
+          if (numbers[idx] === dice && tiles[idx] && tiles[idx] !== "pustinja") {
+            const r = tiles[idx]!;
+            updated.resources[r as keyof typeof updated.resources] += 1;
+          }
+        });
       });
+
+      return updated;
     });
 
-    return updated;
-  });
-
-  setPlayers(newPlayers);
-
-  setLog(prev => [`Baceno ${dice}`, ...prev]);
-};
-
+    setPlayers(newPlayers);
+    setLog(prev => [`Dobijen je broj  ${dice}`, ...prev]);
+  };
 
   const endGame = () => {
     console.log("Rezultati:", players);
-    window.location.reload(); 
+    window.location.reload();
   };
 
   const resourceImages: Record<string, string> = {
@@ -245,8 +212,52 @@ const rollGameDice = () => {
 
   return (
     <div className="board-wrapper">
-      <h1>Igraj Catan</h1>
-      {rolled && <h3>Poslednji broj: <strong>{rolled}</strong></h3>}
+      <div className="left-column">
+  {!started && (
+    <>
+      <button className="dice-btn" onClick={rollDiceAndAssign}>
+        Baci kocku i dodeli brojeve
+      </button>
+      {rolled !== null && <p>Pao broj: {rolled}</p>}
+      <button className="start-btn" onClick={startGame}>
+        Počni igru
+      </button>
+    </>
+  )}
+
+  {started && (
+    <>
+     <div className="button-row">
+       <button className="dice-btn" onClick={rollGameDice}>
+          Baci kocku
+        </button>
+        <button className="start-btn" onClick={endGame}>
+          Završi partiju
+        </button>
+      </div>
+      <div className="player-info">
+        {players.map(p => (
+          <div key={p.id} className="player-box">
+            <h3>{p.name}</h3>
+            <p>
+              🌲 {p.resources.drvo} 🐑 {p.resources.ovca} 🌾 {p.resources.pšenica} 🧱 {p.resources.cigla} 🪨 {p.resources.kamen}
+            </p>
+          </div>
+        ))}
+      </div>
+      <div className="roll-log">
+       
+        <h3>Istorija bacanja:</h3>
+        <ul>
+          {log.map((entry, idx) => (
+            <li key={idx}>{entry}</li>
+          ))}
+        </ul>
+      </div>
+    </>
+  )}
+</div>
+
       <div className="board">
         {hexLayout.map((count, rowIdx) => (
           <div key={rowIdx} className="row">
@@ -269,53 +280,11 @@ const rollGameDice = () => {
                     </div>
                   )}
                 </div>
-              )
+              );
             })}
           </div>
         ))}
       </div>
-
-      <div className="controls">
-        {!started ? (
-          <>
-            <button className="dice-btn" onClick={rollDiceAndAssign}>
-              Baci kocku i dodeli brojeve
-            </button>
-            <button className="start-btn" onClick={startGame}>
-              Počni igru
-            </button>
-          </>
-        ) : (
-          <>
-            <button className="dice-btn" onClick={rollGameDice}>
-              Baci kocku
-            </button>
-            <button className="start-btn" onClick={endGame}>
-              Završi partiju
-            </button>
-          </>
-        )}
-      </div>
-
-      {started && (
-        <div className="stats">
-          <h2>Statistika</h2>
-          {players.map(p => (
-            <div key={p.id}>
-              <h3>{p.name}</h3>
-              <p>
-                🌲 {p.resources.drvo} 🐑 {p.resources.ovca} 🌾 {p.resources.pšenica} 🧱 {p.resources.cigla} 🪨 {p.resources.kamen}
-              </p>
-            </div>
-          ))}
-          <h3>Istorija bacanja:</h3>
-          <ul>
-            {log.map((entry, idx) => (
-              <li key={idx}>{entry}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }
