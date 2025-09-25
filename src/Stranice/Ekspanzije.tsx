@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Ekspanzije.css";
 import eks1 from "../Slike/ekspanzija1.png";
 import eks2 from "../Slike/ekspanzija2.png";
@@ -35,6 +35,14 @@ const expansions: Expansion[] = [
 ];
 
 export default function Ekspanzije() {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
     <div className="ekspanzije-container">
       <div className="ekspanzije-grid">

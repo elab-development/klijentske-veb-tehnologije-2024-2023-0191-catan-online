@@ -40,8 +40,7 @@ const Navbar: React.FC = () => {
       <div className="navbar-right">
         {!user ? (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Registracija</Link>
+            <Link to="/login" className="nav-btn login-btn">Login</Link>
           </>
         ) : (
           <div className="user-section">

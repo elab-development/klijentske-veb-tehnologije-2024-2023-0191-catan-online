@@ -1,7 +1,7 @@
 .ekspanzije-container {
   background-color: #1a1a1a;
   color: white;
-  min-height: 90vh;
+  min-height: 86vh;
   display: flex;
   flex-direction: column;
 }
@@ -34,10 +34,17 @@
   border: 2px solid gold;
   border-radius: 8px;
   height: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+.ekspanzija-box img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px gold;
+  filter: brightness(1.2);
 }
 
 .ekspanzija-box h3 {
-  margin-top: 100px;
+  margin-top: 85px;
   font-weight: bold;
 }
 
@@ -45,24 +52,6 @@
   margin-top: 17px;
   font-size: 14px;
   color: #ddd;
-}
-
-.ekspanzije-footer {
-  background-color: #222;
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.lobby-btn,
-.pravila-btn {
-  background-color: #16a34a;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
 }
 
 .lobby-btn:hover,
