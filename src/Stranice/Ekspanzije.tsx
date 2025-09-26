@@ -50,12 +50,7 @@ const expansions: Expansion[] = [
 ];
 
 export default function Ekspanzije() {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+  
 
   return (
     <div className="ekspanzije-container">

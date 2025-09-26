@@ -52,3 +52,11 @@
 .stats-table td {
   color: #eee;
 }
+
+@media (max-width: 1024px) {
+  .stats-table {
+    width: 100%;
+    font-size: 16px;
+  }
+  
+}

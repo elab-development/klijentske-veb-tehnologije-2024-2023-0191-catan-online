@@ -26,3 +26,23 @@
 .footer-icons img:hover {
   transform: scale(1.1);
 }
+
+@media (max-width: 1024px) {
+  .home-footer {
+    
+    gap: 10px; /* manji razmak između elemenata */
+    padding: 15px 0;
+  }
+
+  .footer-icons {
+   
+    gap: 10px; /* razmak između ikonica */
+    align-items:center; /* centriranje ikonica */
+  }
+
+  .footer-icons img {
+    width: 30px; /* možeš prilagoditi veličinu */
+    height: 30px;
+    margin-bottom: 0; /* ukloni negativni margin */
+  }
+}

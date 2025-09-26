@@ -146,3 +146,28 @@
   transform: scale(0.95);
 }
 
+@media (max-width: 1024px) {
+  .navbar {
+    flex-direction: column; /* sve ide vertikalno */
+    align-items: center;
+    gap: 15px; /* smanjen razmak između sekcija */
+  }
+
+  .navbar-left,
+  .navbar-center,
+  .navbar-right {
+    flex: unset; /* uklanja flex:1 */
+    justify-content: center; /* centriranje sadržaja */
+    width: 100%; /* zauzima celu širinu */
+    text-align: center;
+  }
+
+  .navbar-center {
+    gap: 10px; /* smanjen razmak između linkova */
+    flex-wrap: wrap; /* ako je potrebno prelomiti linkove */
+  }
+
+  .navbar-right {
+    gap: 5px; /* manji razmak između dugmadi */
+  }
+}

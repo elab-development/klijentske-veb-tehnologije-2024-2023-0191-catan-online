@@ -1,25 +1,15 @@
 .ekspanzije-container {
-  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-  color: white;
-  min-height: 86vh;
   display: flex;
   flex-direction: column;
-}
-
-.user-info {
-  font-size: 14px;
-  color: #aaa;
-  margin-left: 20px;
+  color: white;
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  padding: 30px;
 }
 
 .ekspanzije-grid {
-  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
-  padding: 30px;
-  background-color: #2b2f3b;
-  border-top: 3px solid gold;
 }
 
 .ekspanzija-box {
@@ -64,10 +54,4 @@
   font-size: 15px;
   line-height: 1.4;
   color: #eee;
-}
-
-.lobby-btn:hover,
-.pravila-btn:hover {
-  background-color: #15803d;
-  transform: scale(1.05);
 }

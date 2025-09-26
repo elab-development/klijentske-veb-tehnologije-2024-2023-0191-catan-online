@@ -103,3 +103,18 @@ body, html {
   height: auto;
   object-fit: contain;
 }
+
+
+@media (max-width: 1024px) {
+  .register-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .register-image {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  
+}

@@ -24,6 +24,8 @@ body, html {
   max-width: 1200px;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+
 }
 
 .login-form {
@@ -115,4 +117,17 @@ body, html {
 .login-image {
   width: 400px;
   max-width: 45%;
+}
+
+
+@media (max-width: 1024px) {
+  .login-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-image {
+    width: 80%;
+    max-width: 300px;
+  }
 }

@@ -1,5 +1,6 @@
 .pravila-container {
-  background-color: #1a1a1a;     color: white;
+  background-color: #1a1a1a;
+  color: white;
   min-height: 86vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -9,6 +10,7 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/* Gornja dva boxa */
 .pravila-top {
   grid-column: 1 / 4;
   display: flex;
@@ -17,6 +19,7 @@
   flex-wrap: wrap;
 }
 
+/* Svi boxovi */
 .pravila-box,
 .pravila-left,
 .pravila-center,
@@ -51,9 +54,34 @@
   text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
 }
 
+/* Boje pojedinačnih boxova */
 .pravila-center {
-  background-color: #991b1b; }
+  background-color: #991b1b; 
+}
 
 .pravila-left,
 .pravila-right {
-  background-color: #3b4050; }
+  background-color: #3b4050; 
+}
+
+/* ------------------- RESPONZIVNOST ------------------- */
+@media (max-width: 1024px) {
+  .pravila-container {
+    grid-template-columns: 1fr; /* sve ide jedna ispod druge */
+    grid-template-rows: auto;
+  }
+
+  .pravila-top {
+    display: grid; /* unutar top dela prva dva boxa prelaze u kolonu */
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pravila-box,
+  .pravila-left,
+  .pravila-center,
+  .pravila-right {
+    width: 100%;  
+    flex: unset; /* uklanja flex:1 da ne pravi probleme */
+  }
+}
