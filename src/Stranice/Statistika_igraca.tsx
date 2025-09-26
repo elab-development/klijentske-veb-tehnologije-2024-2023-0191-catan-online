@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Statistika_igraca.css";
 import { PlayerStats } from "../Modeli/Statistika"; 
 
@@ -10,6 +10,21 @@ export default function Stats() {
 
   const playerStats = new PlayerStats(12, 7, 85); 
   const stats = playerStats.getStats();
+
+  const [quote, setQuote] = useState<string>("Učitavam motivacionu poruku...");
+
+  useEffect(() => {
+    fetch("https://api.quotable.io/random")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.content) {
+          setQuote(`"${data.content}" — ${data.author}`);
+        }
+      })
+      .catch(() => {
+        setQuote("You win some, you lose some.");
+      });
+  }, []);
 
   return (
     <div className="stats-container">
@@ -34,6 +49,11 @@ export default function Stats() {
           </tr>
         </tbody>
       </table>
+
+      <div className="quote-box">
+        <h2>Motivacija za nastavak igre</h2>
+        <p>{quote}</p>
+      </div>
     </div>
   );
 }

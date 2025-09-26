@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Igraj.css";
 
 import pustinjaImg from "../slike/pustinja.png";
@@ -84,9 +84,17 @@ export default function Igraj() {
     kamen: "🪨",
   };
 
-  function rollTwoDice(): number {
-    return Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+  async function rollTwoDiceAPI() {
+    try {
+      const res = await fetch("https://www.dejete.com/api/dice?numdice=2&numsides=6");
+      const data = await res.json();
+      const sum = data.dice.reduce((a: number, b: number) => a + b, 0);
+      return sum;
+    } catch {
+      return Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6) + 1;
+    }
   }
+
   function rollOneDie(): number {
     return Math.floor(Math.random() * 6) + 1;
   }
@@ -187,9 +195,15 @@ export default function Igraj() {
     setStarted(true);
   };
 
-  const rollGameDice = () => {
-    const dice = rollTwoDice();
+  const [shake, setShake] = useState(false);
+
+  const rollGameDice = async () => {
+    setShake(true);
+    setTimeout(() => setShake(false), 500);
+
+    const dice = await rollTwoDiceAPI();
     setRolled(dice);
+
     const newPlayers = players.map(p => {
       const upd = { ...p, resources: { ...p.resources } };
       const troms = playerTromedje.filter(t => t.id === p.id);
@@ -203,6 +217,7 @@ export default function Igraj() {
       });
       return upd;
     });
+
     setPlayers(newPlayers);
     setLog(prev => [`Dobijen je broj ${dice}`, ...prev].slice(0, 4));
   };
@@ -211,7 +226,6 @@ export default function Igraj() {
 
   return (
     <>
-
       <div className="board-wrapper">
         <div className="left-column">
           {!started && (
@@ -227,18 +241,20 @@ export default function Igraj() {
           {started && (
             <>
               <div className="button-row">
-                <div className="dice-icon" onClick={rollGameDice}>
+                <div
+                  className={`dice-icon ${shake ? "dice-shake" : ""}`}
+                  onClick={rollGameDice}>
                   <span style={{ fontSize: "32px", cursor: "pointer" }}>🎲</span>
                 </div>
+
                 <button
                   className="start-btn"
                   onClick={() => {
-                  resetGame();
-                  window.location.href = "/";
+                    resetGame();
+                    window.location.href = "/";
                   }}>
-                      Završi partiju
-                  </button>
-
+                  Završi partiju
+                </button>
               </div>
 
               <div className="player-info">
@@ -263,8 +279,11 @@ export default function Igraj() {
             <div key={rowIdx} className="row">
               {Array(count).fill(null).map(() => {
                 const idx = counter++;
+                const owner = playerTromedje.find(t => t.fields.includes(idx));
+                const ownerClass = owner ? `owned player-${owner.id}` : "";
+
                 return (
-                  <div key={idx} className="hex">
+                  <div key={idx} className={`hex ${ownerClass}`}>
                     {tiles[idx] ? (
                       <>
                         <img src={resourceImages[tiles[idx]!]} alt={tiles[idx]!} />
@@ -287,10 +306,10 @@ export default function Igraj() {
         </div>
 
         <div className="controls-top">
-        <button onClick={saveGame} className="small-btn">Sačuvaj</button>
-        <button onClick={loadGame} className="small-btn">Učitaj</button>
-        <button onClick={resetGame} className="small-btn">Reset</button>
-      </div>
+          <button onClick={saveGame} className="small-btn">Sačuvaj</button>
+          <button onClick={loadGame} className="small-btn">Učitaj</button>
+          <button onClick={resetGame} className="small-btn">Reset</button>
+        </div>
       </div>
     </>
   );
