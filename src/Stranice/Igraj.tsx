@@ -107,7 +107,7 @@ export default function Igraj() {
 
   function loadGame() {
     const saved = localStorage.getItem("catan_game");
-    if (!saved) return alert("❌ Nema sačuvane partije.");
+    if (!saved) return alert("❌Nema sačuvane partije.");
     try {
       const parsed = JSON.parse(saved);
       setTiles(parsed.tiles || Array(19).fill(null));
