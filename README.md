@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# 🌍 Settlers of Catan Online
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ovo je projekat urađen u okviru predmeta **Klijentske veb tehnologije**.  
+Predstavlja online verziju društvene igre *Settlers of Catan*, razvijenu pomoću **React + TypeScript**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Pokretanje projekta lokalno
 
-### `npm start`
+Pratite sledeće korake da biste pokrenuli aplikaciju na svojoj mašini:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. **Kloniranje repozitorijuma**
+git clone https://github.com/elab-development/klijentske-veb-tehnologije-2024-2023-0191-catan-online.git
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. **Ulazak u projekat**
+cd klijentske-veb-tehnologije-2024-2023-0191-catan-online
 
-### `npm test`
+3. **Instalacija potrebnih paketa**
+Pod pretpostavkom da na racunaru imate instaliran node.js
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. **Pokretanje aplikacije**
+npm start
 
-### `npm run build`
+Aplikacija će se pokrenuti na adresi: http://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**📌 Funkcionalnosti projekta**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Prijava i registracija korisnika (čuvanje u localStorage)
 
-### `npm run eject`
+Navigacija putem Navbar-a (Home, Pravila igre, Ekspanzije, Statistika, Logout/Login)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Pravila igre – stranica sa objašnjenjem osnovnih pravila Catana
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Ekspanzije – prikaz i opis dodataka za igru
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Home stranica – centralna početna stranica sa dugmetom za započinjanje igre
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Statistika igrača – prikaz osnovnih statističkih informacija o igračima
 
-## Learn More
+Footer sa ikonama i linkovima
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Responzivni dizajn – sve stranice prilagođene za uređaje užih ekrana (< 1024px)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+👨‍💻 Autori
+Projekat urađen u okviru predmeta Klijentske veb tehnologije.
+Student: Bodiroga Veljko 2023/0246
+         Bošnjaković Danilo 2023/0191
