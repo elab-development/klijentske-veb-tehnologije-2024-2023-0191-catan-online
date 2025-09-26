@@ -148,26 +148,26 @@
 
 @media (max-width: 1024px) {
   .navbar {
-    flex-direction: column; /* sve ide vertikalno */
+    flex-direction: column; 
     align-items: center;
-    gap: 15px; /* smanjen razmak između sekcija */
+    gap: 15px; 
   }
 
   .navbar-left,
   .navbar-center,
   .navbar-right {
-    flex: unset; /* uklanja flex:1 */
-    justify-content: center; /* centriranje sadržaja */
-    width: 100%; /* zauzima celu širinu */
+    flex: unset; 
+    justify-content: center; 
+    width: 100%; 
     text-align: center;
   }
 
   .navbar-center {
-    gap: 10px; /* smanjen razmak između linkova */
-    flex-wrap: wrap; /* ako je potrebno prelomiti linkove */
+    gap: 10px; 
+    flex-wrap: wrap; 
   }
 
   .navbar-right {
-    gap: 5px; /* manji razmak između dugmadi */
+    gap: 5px; 
   }
 }

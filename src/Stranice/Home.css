@@ -1,7 +1,7 @@
 .home {
   display: flex;
   flex-direction: column;
-  min-height: 86vh; /* koristi min-height da sadržaj može da raste */
+  min-height: 86vh; 
   color: white;
 }
 
@@ -14,8 +14,8 @@
   background-size: cover;
   background-position: center;
   width: 100%;
-  overflow-y: auto; /* omogućava vertikalni scroll ako sadržaj ne stane */
-  padding: 20px; /* dodaj malo paddinga da sadržaj ne lepi uz ivice */
+  overflow-y: auto; 
+  padding: 20px; 
 }
 
 .center-content {
@@ -53,11 +53,11 @@
   color: black;
 }
 
-.options {
+.options-wrapper {
   display: flex;
   justify-content: center;
-  gap: 50px;
-  flex-wrap: wrap; /* omogući da dugmad pređu u novi red na malim ekranima */
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
 .option-btn {
@@ -80,37 +80,51 @@
   color: black;
 }
 
-/* RESPONZIVNOST ZA EKRANE MANJE OD 1024px */
-@media (max-width: 1024px) {
-  .home-main {
-    justify-content: flex-start; /* pomeri sadržaj malo gore */
-    padding: 40px 20px;
-  }
 
+@media (max-width: 768px) {
   .hex-logo {
-    height: 300px; /* smanji logo na manjim ekranima */
-    margin-top: 0;
-    margin-bottom: 20px;
+    height: 220px;
+    margin: 0 0 20px 0;
   }
 
   .play-btn {
-    padding: 15px 80px; /* smanji dugme */
-    font-size: 20px;
+    padding: 12px 40px;
+    font-size: 18px;
     width: 100%;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    max-width: 300px;
   }
 
-  .options {
-    flex-direction: column; /* dugmad jedno ispod drugog */
-    gap: 20px;
+  .options-wrapper {
+    flex-direction: column; 
+    gap: 15px;
     width: 100%;
     align-items: center;
+    margin-top: 15px;
   }
 
   .option-btn {
-    width: 100%; /* zauzima širu širinu */
-    max-width: 300px;
-    margin-bottom: 20px;
+    width: 100%;
+    max-width: 250px;
+    font-size: 18px;
+    height: 45px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .hex-logo {
+    height: 160px;
+  }
+
+  .play-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 50px;
+  }
+
+  .option-btn {
+    font-size: 16px;
+    height: 40px;
+    border-radius: 50px;
   }
 }

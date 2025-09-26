@@ -22,6 +22,7 @@ function App() {
         <Route path="/pravila" element={<CatanInfo />} />
         <Route path="/igraj" element={<Igraj />} />
         <Route path="/ekspanzije" element={<Ekspanzije />} />
+        <Route path="*" element={<h1>Stranica nije pronađena</h1>} />
       </Routes>
       <Footer/>
     </Router>

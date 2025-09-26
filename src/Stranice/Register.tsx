@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
-import catanImage from "../Slike/katantabla.png";
+import catanImage from "../slike/katantabla.png";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");

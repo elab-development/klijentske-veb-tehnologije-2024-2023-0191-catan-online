@@ -55,3 +55,85 @@
   line-height: 1.4;
   color: #eee;
 }
+
+
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pagination button {
+  padding: 10px 16px;
+  border: 2px solid gold;
+  background: transparent;
+  color: gold;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: gold;
+  color: #1a1a1a;
+  transform: scale(1.08);
+  box-shadow: 0 0 12px gold;
+}
+
+.pagination button:disabled {
+  border-color: #555;
+  color: #555;
+  cursor: not-allowed;
+  background: #222;
+}
+
+.pagination button.active {
+  background: gold;
+  color: #1a1a1a;
+  box-shadow: 0 0 15px gold;
+}
+
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.filters input,
+.filters select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 2px solid gold;
+  background: #2d2d2d;
+  color: gold;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.filters input::placeholder {
+  color: #aaa;
+}
+
+.filters input:focus,
+.filters select:focus {
+  border-color: #ffd700;
+  box-shadow: 0 0 12px gold;
+}
+
+.filters select {
+  cursor: pointer;
+}
+
+.filter-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #ffd700;
+  font-weight: bold;
+}

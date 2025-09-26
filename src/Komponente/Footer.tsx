@@ -1,9 +1,9 @@
 import React from "react";
 import "./Footer.css";
-import ikonica1 from "../Slike/ikonica1.png";
-import ikonica2 from "../Slike/ikonica2.png";
-import ikonica3 from "../Slike/ikonica3.png";
-import ikonica4 from "../Slike/ikonica4.png";
+import ikonica1 from "../slike/ikonica1.png";
+import ikonica2 from "../slike/ikonica2.png";
+import ikonica3 from "../slike/ikonica3.png";
+import ikonica4 from "../slike/ikonica4.png";
 
 const Footer: React.FC = () => {
   return (

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useEffect } from "react";
 
-import pozadina from "../Slike/pozadina.png";
-import katantabla from "../Slike/katantabla.png";
+import pozadina from "../slike/pozadina.png";
+import katantabla from "../slike/katantabla.png";
 import Navbar from "../Komponente/NavBar";
 
 const Home: React.FC = () => {

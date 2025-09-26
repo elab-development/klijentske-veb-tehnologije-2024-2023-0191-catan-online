@@ -10,7 +10,7 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* Gornja dva boxa */
+
 .pravila-top {
   grid-column: 1 / 4;
   display: flex;
@@ -19,7 +19,7 @@
   flex-wrap: wrap;
 }
 
-/* Svi boxovi */
+
 .pravila-box,
 .pravila-left,
 .pravila-center,
@@ -31,7 +31,7 @@
   color: #eee;
   font-size: 18px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
@@ -40,7 +40,7 @@
 .pravila-center:hover,
 .pravila-right:hover {
   transform: translateY(-6px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
 }
 
 .pravila-box h3,
@@ -51,28 +51,28 @@
   font-size: 24px;
   font-weight: bold;
   color: gold;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
 }
 
-/* Boje pojedinačnih boxova */
+
 .pravila-center {
-  background-color: #991b1b; 
+  background-color: #991b1b;
 }
 
 .pravila-left,
 .pravila-right {
-  background-color: #3b4050; 
+  background-color: #3b4050;
 }
 
-/* ------------------- RESPONZIVNOST ------------------- */
+
 @media (max-width: 1024px) {
   .pravila-container {
-    grid-template-columns: 1fr; /* sve ide jedna ispod druge */
+    grid-template-columns: 1fr; 
     grid-template-rows: auto;
   }
 
   .pravila-top {
-    display: grid; /* unutar top dela prva dva boxa prelaze u kolonu */
+    display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -81,7 +81,7 @@
   .pravila-left,
   .pravila-center,
   .pravila-right {
-    width: 100%;  
-    flex: unset; /* uklanja flex:1 da ne pravi probleme */
+    width: 100%;
+    flex: unset;
   }
 }
